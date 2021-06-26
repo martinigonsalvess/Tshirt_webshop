@@ -1,6 +1,5 @@
 import React from "react";
-// import Products from "./components/Products/Products";
-// import Navbar from "./components/Navbar/Navbar";
+import { commerce } from "./lib/commerce";
 
 import { Products, Navbar } from "./components";
 
