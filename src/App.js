@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { commerce } from "./lib/commerce";
 import { Products, Navbar } from "./components";
+import { SelectAllRounded } from "@material-ui/icons";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -11,15 +12,31 @@ const App = () => {
 
     setProducts(data);
   };
+  //what is in the cart
+  const fetchCart = async () => {
+    const cart = await commerce.cart.retrieve();
+    setCart(cart);
+    //in short setCart(await commer.cart.retrieve())
+  };
+
+  //set items to cart
+  const handleAddToCart = async (productId, quantity) => {
+    const item = await commerce.cart.add(productId, quantity);
+
+    setCart(item.cart);
+  };
 
   useEffect(() => {
     fetchProducts();
+    fetchCart();
   }, []);
+
+  console.log(cart);
 
   return (
     <div>
-      <Navbar />
-      <Products products={products} />
+      <Navbar totalItems={cart.total_items} />
+      <Products products={products} onAddToCart={handleAddToCart} />
     </div>
   );
 };
