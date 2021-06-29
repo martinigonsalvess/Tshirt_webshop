@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 
 import useStyles from "./styles";
 
-const Cart = ({ cart }) => {
+const Cart = ({
+  cart,
+  handleUpdateCartQty,
+  handleRemoveFromCart,
+  handleEmptyCart,
+}) => {
   //   const isEmpty = !cart.line_items.length;
   const classes = useStyles();
 
@@ -39,6 +44,7 @@ const Cart = ({ cart }) => {
             type="button"
             variant="contained"
             color="secondary"
+            onClick={handleEmptyCart}
           >
             Empty Cart
           </Button>
