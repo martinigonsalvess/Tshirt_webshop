@@ -30,10 +30,24 @@ const App = () => {
     fetchProducts();
     fetchCart();
   }, []);
+
   //Updating the quantity of a specific product, calling API features from Commerce js
   const handleUpdateCartQty = async (productId, quantity) => {
     const update = await commerce.cart.update(productId, { quantity });
+
     setCart(update.cart);
+  };
+  //Deleting a specific product, calling API features from Commerce js
+  const handleRemoveFromCart = async (productId) => {
+    const remove = await commerce.cart.remove(productId);
+
+    setCart(remove.cart);
+  };
+  //Empty the Cart, calling API features from Commerce js
+  const handleEmptyCart = async () => {
+    const emptyCart = await commerce.cart.empty();
+
+    setCart(emptyCart);
   };
 
   return (
