@@ -30,8 +30,11 @@ const App = () => {
     fetchProducts();
     fetchCart();
   }, []);
-
-  console.log(cart);
+  //Updating the quantity of a specific product, calling API features from Commerce js
+  const handleUpdateCartQty = async (productId, quantity) => {
+    const update = await commerce.cart.update(productId, { quantity });
+    setCart(update.cart);
+  };
 
   return (
     <Router>
