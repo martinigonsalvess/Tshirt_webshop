@@ -11,7 +11,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { Link } from "react-router-dom";
 import FormInput from "./CustomTextField";
 
-const AddressForm = () => {
+const AddressForm = ({ next }) => {
   const methods = useForm();
 
   return (
@@ -20,7 +20,7 @@ const AddressForm = () => {
         Shipping Address
       </Typography>
       <FormProvider {...methods}>
-        <form onSubmit="">
+        <form onSubmit={methods.handleSubmit((data) => next({ ...data }))}>
           <Grid container spacing={3}>
             <FormInput required name="firstName" label="First name" />
             <FormInput required name="lastName" label="Last name" />
@@ -30,7 +30,7 @@ const AddressForm = () => {
             <FormInput required name="email" label="Email" />
           </Grid>
           <br />
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button component={Link} to="/cart" variant="outlined">
               Back to Cart
             </Button>

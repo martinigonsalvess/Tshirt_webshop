@@ -18,12 +18,25 @@ const steps = ["Shipping address", "Payment details"];
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [shippingData, setShippingData] = useState({});
   const classes = useStyles();
+
+  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const next = (data) => {
+    setShippingData(data);
+    nextStep();
+  };
 
   const Confirmation = () => <div>Confirmation</div>;
 
   //Depending on which step we currently on
-  const Form = () => (activeStep === 0 ? <AddressForm /> : <PaymentForm />);
+  const Form = () =>
+    activeStep === 0 ? (
+      <AddressForm next={next} />
+    ) : (
+      <PaymentForm shippingData={shippingData} />
+    );
 
   return (
     <>
